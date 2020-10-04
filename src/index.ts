@@ -4,7 +4,7 @@ config();
 
 const client = new ClientWithCommands();
 
-const { CLIENT_ID, TOKEN, PREFIX } = process.env;
+const { TOKEN, PREFIX } = process.env;
 
 const handlerNames = ['command'];
 
@@ -28,12 +28,13 @@ client.on('ready', () => {
 });
 
 client.on('message', async (msg) => {
+  if (PREFIX === undefined) return;
   // If author is bot, return
   if (msg.author.bot) return;
   // If message isn't in a server, return
   if (!msg.guild) return;
   // If message doesn't start with prefix, return
-  if (!msg.content.startsWith(process.env.PREFIX)) return;
+  if (!msg.content.startsWith(PREFIX)) return;
 
   // If message.member is uncached, cache it.
   // @ts-expect-error

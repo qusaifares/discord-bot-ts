@@ -1,14 +1,21 @@
-import { Command } from './../../libs/command';
+import { Command, CommandInfo, CommandRun } from './../../libs/command';
 
-const rolldice: Command = {
+const options: CommandInfo = {
   name: 'rolldice',
   category: 'fun',
   aliases: [],
   description: 'Rolls a die.',
-  run: async (client, message, args) => {
-    const num = Math.ceil(Math.random() * 6);
-    message.reply(`You rolled a ${num}.`);
-  }
+
+  argNames: [],
+  minArgs: 0,
+  maxArgs: 0
 };
+
+const run: CommandRun = async (client, message, args) => {
+  const num = Math.ceil(Math.random() * 6);
+  message.reply(`You rolled a ${num}.`);
+};
+
+const rolldice = new Command(options, run);
 
 export default rolldice;
